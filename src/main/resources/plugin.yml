@@ -1,0 +1,4 @@
+name: TorchArrow
+main: io.github.jhale1805.torcharrow.TorchArrow
+version: 1.0
+api-version: 1.16
