@@ -12,7 +12,7 @@ public class TorchArrowPlugin extends JavaPlugin {
         getLogger().info("Registering Torch Arrow event listeners.");
         getServer().getPluginManager().registerEvents(new TorchArrowListener(this), this);
         getLogger().info("Adding crafting recipie for Torch Arrows.");
-        Bukkit.addRecipe(new TorchArrowRecipie(this));
+        Bukkit.addRecipe(new TorchArrowRecipe(this));
     }
 
     @Override

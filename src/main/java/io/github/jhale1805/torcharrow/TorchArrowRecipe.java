@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.Plugin;
 
-public class TorchArrowRecipie extends ShapedRecipe {
+public class TorchArrowRecipe extends ShapedRecipe {
 
     public static final String NAMESPACED_KEY = "torch_arrow";
     
@@ -27,7 +27,7 @@ public class TorchArrowRecipie extends ShapedRecipe {
      * @param plugin The Torch Arrow plugin. Required for associating this
      *          recipie with the plugin.
      */
-    public TorchArrowRecipie(Plugin plugin) {
+    public TorchArrowRecipe(Plugin plugin) {
         super(new NamespacedKey(plugin, NAMESPACED_KEY), new TorchArrow());
         shape(" A ", "ACA", " A ");
         setIngredient('C', Material.COAL);
