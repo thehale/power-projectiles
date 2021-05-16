@@ -2,6 +2,9 @@ package io.github.jhale1805.torcharrow;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Directional;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -15,10 +18,24 @@ public class TorchArrowListener implements Listener {
         Projectile projectile = event.getEntity();
         if (projectile instanceof Arrow) {
             Block hitBlock = event.getHitBlock();
+            BlockFace hitBlockFace = event.getHitBlockFace();
             if (hitBlock != null) {
-                hitBlock.setType(Material.TORCH);
+                System.out.println(hitBlockFace);
+                Block adj = hitBlock.getWorld().getBlockAt(
+                    hitBlock.getX() + hitBlockFace.getModX(),
+                    hitBlock.getY() + hitBlockFace.getModY(),
+                    hitBlock.getZ() + hitBlockFace.getModZ()
+                );
+                if (!hitBlockFace.equals(BlockFace.DOWN)) {
+                    BlockData torch = Material.TORCH.createBlockData();
+                    if (!hitBlockFace.equals(BlockFace.UP)) {
+                        torch = Material.WALL_TORCH.createBlockData();
+                        ((Directional) torch).setFacing(hitBlockFace);
+                    }
+                    adj.setBlockData(torch);
+                    projectile.remove();
+                }   
             }
-            projectile.remove();
         }
     }
 
