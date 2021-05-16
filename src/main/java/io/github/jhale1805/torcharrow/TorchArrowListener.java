@@ -18,6 +18,7 @@ public class TorchArrowListener implements Listener {
             if (hitBlock != null) {
                 hitBlock.setType(Material.TORCH);
             }
+            projectile.remove();
         }
     }
 
