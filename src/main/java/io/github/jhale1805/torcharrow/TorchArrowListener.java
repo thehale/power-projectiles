@@ -16,11 +16,10 @@ public class TorchArrowListener implements Listener {
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent event) {
         Projectile projectile = event.getEntity();
-        if (projectile instanceof Arrow) {
+        if (projectile instanceof Arrow && ((Arrow) projectile).getFireTicks() > 0) {
             Block hitBlock = event.getHitBlock();
             BlockFace hitBlockFace = event.getHitBlockFace();
             if (hitBlock != null) {
-                System.out.println(hitBlockFace);
                 Block adj = hitBlock.getWorld().getBlockAt(
                     hitBlock.getX() + hitBlockFace.getModX(),
                     hitBlock.getY() + hitBlockFace.getModY(),
