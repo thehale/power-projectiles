@@ -2,7 +2,6 @@ package io.github.jhale1805.torcharrow;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
@@ -29,7 +28,7 @@ public class TorchArrowListener implements Listener {
     
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent event) {
-        // Check preconditions for torch conversion
+        // Check preconditions for torch placement
         if (!(event.getEntity() instanceof Arrow
                 && event.getEntity().getFireTicks() > 0
                 && event.getEntity().getMetadata("effect").contains(torchArrowMetadata)
@@ -38,24 +37,15 @@ public class TorchArrowListener implements Listener {
                 && !event.getHitBlockFace().equals(BlockFace.DOWN))) 
             return;
 
-        // Get location of block in which to place the torch.
-        Block hitBlock = event.getHitBlock();
-        BlockFace hitBlockFace = event.getHitBlockFace();
-        Block adj = hitBlock.getWorld().getBlockAt(
-            hitBlock.getX() + hitBlockFace.getModX(),
-            hitBlock.getY() + hitBlockFace.getModY(),
-            hitBlock.getZ() + hitBlockFace.getModZ()
-        );
-
         // Compute torch orientation
         BlockData torch = Material.TORCH.createBlockData();
-        if (!hitBlockFace.equals(BlockFace.UP)) {
+        if (!event.getHitBlockFace().equals(BlockFace.UP)) {
             torch = Material.WALL_TORCH.createBlockData();
-            ((Directional) torch).setFacing(hitBlockFace);
+            ((Directional) torch).setFacing(event.getHitBlockFace());
         }
 
-        // Convert arrow to torch
-        adj.setBlockData(torch);
+        // Place the torch where the arrow landed
+        event.getHitBlock().getRelative(event.getHitBlockFace()).setBlockData(torch);
         event.getEntity().remove();
         
     }
