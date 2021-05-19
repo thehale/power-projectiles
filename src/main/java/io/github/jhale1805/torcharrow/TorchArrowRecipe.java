@@ -2,7 +2,9 @@ package io.github.jhale1805.torcharrow;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Tag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.RecipeChoice.MaterialChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.Plugin;
 
@@ -30,7 +32,7 @@ public class TorchArrowRecipe extends ShapedRecipe {
     public TorchArrowRecipe(Plugin plugin) {
         super(new NamespacedKey(plugin, NAMESPACED_KEY), new TorchArrow());
         shape(" A ", "ACA", " A ");
-        setIngredient('C', Material.COAL);
+        setIngredient('C', new MaterialChoice(Tag.ITEMS_COALS));
         setIngredient('A', Material.ARROW);
     }
 
