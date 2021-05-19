@@ -64,6 +64,7 @@ public class TorchArrowListener implements Listener {
     public void onEntityShootBow(EntityShootBowEvent event) {
         if (event.getConsumable().getItemMeta().equals(new TorchArrow().getItemMeta())) {
             event.getProjectile().setMetadata("effect", torchArrowMetadata);
+            event.setConsumeItem(true);  // Ignore the effects of Infinity
         }
     }
 
