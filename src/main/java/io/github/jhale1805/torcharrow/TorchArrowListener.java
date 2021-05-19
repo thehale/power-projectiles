@@ -68,8 +68,8 @@ public class TorchArrowListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerRecipieDiscover(PlayerRecipeDiscoverEvent event) {
-        // Show the Torch Arrow in the recipie book upon discovering torches.
+    public void onPlayerRecipeDiscover(PlayerRecipeDiscoverEvent event) {
+        // Show the Torch Arrow in the recipe book upon discovering torches.
         if(event.getRecipe().getNamespace().equals("minecraft:torch")) {
             event.getPlayer().discoverRecipe(new TorchArrowRecipe(plugin).getKey());
         }
@@ -77,7 +77,7 @@ public class TorchArrowListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        // Show the Torch Arrow in the recipie book to those that have discovered torches.
+        // Show the Torch Arrow in the recipe book to those that have discovered torches.
         if (event.getPlayer().hasDiscoveredRecipe(NamespacedKey.fromString("minecraft:torch"))) {
             event.getPlayer().discoverRecipe(new TorchArrowRecipe(plugin).getKey());
         }

@@ -11,9 +11,9 @@ public class TorchArrowRecipe extends ShapedRecipe {
     public static final String NAMESPACED_KEY = "torch_arrow";
     
     /**
-     * The recipie for crafting torch arrows.
+     * The recipe for crafting torch arrows.
      * 
-     * This recipie yields 4 torch arrows, enough to generate the same number
+     * This recipe yields 4 torch arrows, enough to generate the same number
      * of torches that the single piece of coal could be used to craft.
      * 
      * -------------
@@ -25,7 +25,7 @@ public class TorchArrowRecipe extends ShapedRecipe {
      * -------------
      * 
      * @param plugin The Torch Arrow plugin. Required for associating this
-     *          recipie with the plugin.
+     *          recipe with the plugin.
      */
     public TorchArrowRecipe(Plugin plugin) {
         super(new NamespacedKey(plugin, NAMESPACED_KEY), new TorchArrow());
