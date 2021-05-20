@@ -1,7 +1,9 @@
 package io.github.jhale1805.torcharrow;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.advancement.Advancement;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
@@ -10,8 +12,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerRecipeDiscoverEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -59,17 +61,19 @@ public class TorchArrowListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerRecipeDiscover(PlayerRecipeDiscoverEvent event) {
-        // Show the Torch Arrow in the recipe book upon discovering torches.
-        if(event.getRecipe().getNamespace().equals("minecraft:torch")) {
+    public void onPlayerAdvancementDone(PlayerAdvancementDoneEvent event) {
+        // Show the Torch Arrow in the recipe book upon completing the Enchanter advancement.
+        Advancement enchanter = Bukkit.getAdvancement(NamespacedKey.minecraft("story/enchant_item"));
+        if (event.getAdvancement().equals(enchanter)) {
             event.getPlayer().discoverRecipe(new TorchArrowRecipe(plugin).getKey());
         }
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        // Show the Torch Arrow in the recipe book to those that have discovered torches.
-        if (event.getPlayer().hasDiscoveredRecipe(NamespacedKey.fromString("minecraft:torch"))) {
+        // Show the Torch Arrow in the recipe book to those that have completed the Enchanter advancement.
+        Advancement enchanter = Bukkit.getAdvancement(NamespacedKey.minecraft("story/enchant_item"));
+        if (event.getPlayer().getAdvancementProgress(enchanter).isDone()) {
             event.getPlayer().discoverRecipe(new TorchArrowRecipe(plugin).getKey());
         }
     }
