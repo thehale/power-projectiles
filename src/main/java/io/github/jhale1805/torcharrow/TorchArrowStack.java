@@ -7,16 +7,16 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class TorchArrow extends ItemStack {
+public class TorchArrowStack extends ItemStack {
 
     private final static String DISPLAY_NAME = ChatColor.RED + "Torch Arrow";
 
-    public TorchArrow() {
+    public TorchArrowStack() {
         super(Material.ARROW);
         setMetadata();
     }
 
-    public TorchArrow(int count) {
+    public TorchArrowStack(int count) {
         this();
         this.setAmount(count);
     }
@@ -40,11 +40,11 @@ public class TorchArrow extends ItemStack {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof TorchArrow)) {
+        if (!(obj instanceof TorchArrowStack)) {
             return false;
         } 
 
-        if (((TorchArrow) obj).getAmount() == this.getAmount()) {
+        if (((TorchArrowStack) obj).getAmount() == this.getAmount()) {
             return true;
         } else {
             return false;

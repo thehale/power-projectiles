@@ -26,6 +26,7 @@ repositories {
   */
   maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
   maven { url = 'https://oss.sonatype.org/content/repositories/central' }
+  maven { url 'https://hub.spigotmc.org/nexus/content/repositories/public/' }  // Repo for MockBukkit
   mavenLocal() // This is needed for CraftBukkit and Spigot.
 }
 
@@ -33,6 +34,8 @@ repositories {
 dependencies {
   implementation 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT' // The Spigot API with no shadowing. Requires the OSS repo.
   testImplementation 'junit:junit:4.12'
+  testImplementation 'com.github.seeseemelk:MockBukkit-v1.16:1.0.0'  // MockBukkit server required for Unit Testing
+  testImplementation "org.mockito:mockito-core:3.+"  // Used for Unit Testing
 }
 
 jar {

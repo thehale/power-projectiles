@@ -1,9 +1,31 @@
 package io.github.jhale1805.torcharrow;
 
+import java.io.File;
+
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.java.JavaPluginLoader;
 
 public class TorchArrowPlugin extends JavaPlugin {
+
+    /**
+     * Default constructor.
+     * 
+     * <p>Used solely by MockBukkit during unit tests.
+     */
+    public TorchArrowPlugin() {
+        super();
+    }
+
+    /**
+     * Parameterized constructor.
+     * 
+     * <p>Used solely by MockBukkit during unit tests.
+     */
+    protected TorchArrowPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
+        super(loader, description, dataFolder, file);
+    }
 
     @Override
     public void onEnable() {

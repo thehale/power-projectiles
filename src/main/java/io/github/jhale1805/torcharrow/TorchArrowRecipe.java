@@ -30,7 +30,7 @@ public class TorchArrowRecipe extends ShapedRecipe {
      *          recipe with the plugin.
      */
     public TorchArrowRecipe(Plugin plugin) {
-        super(new NamespacedKey(plugin, NAMESPACED_KEY), new TorchArrow());
+        super(new NamespacedKey(plugin, NAMESPACED_KEY), new TorchArrowStack());
         shape(" A ", "ACA", " A ");
         setIngredient('C', new MaterialChoice(Tag.ITEMS_COALS));
         setIngredient('A', Material.ARROW);
@@ -38,7 +38,7 @@ public class TorchArrowRecipe extends ShapedRecipe {
 
     @Override
     public ItemStack getResult() {
-        return new TorchArrow(4);
+        return new TorchArrowStack(4);
     }
 
 }

@@ -21,7 +21,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class TorchArrowListener implements Listener {
 
     private JavaPlugin plugin;
-    private MetadataValue torchArrowMetadata;
+    final MetadataValue torchArrowMetadata;
 
     public TorchArrowListener(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -54,7 +54,7 @@ public class TorchArrowListener implements Listener {
 
     @EventHandler
     public void onEntityShootBow(EntityShootBowEvent event) {
-        if (event.getConsumable().getItemMeta().equals(new TorchArrow().getItemMeta())) {
+        if (event.getConsumable().getItemMeta().equals(new TorchArrowStack().getItemMeta())) {
             event.getProjectile().setMetadata("effect", torchArrowMetadata);
             event.setConsumeItem(true);  // Ignore the effects of Infinity
         }
