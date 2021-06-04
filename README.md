@@ -14,7 +14,7 @@ use them to defend yourself from attacking mobs and players.
 Add a little extra bang to your shot with arrows that create a mini TNT explosion
 upon impact! Requires a Flame enchanted bow to work.
 
-### Forest Fires Arrows
+### Forest Fire Arrows
 Harness the power of the blaze rod to engulf your enemies in flames!
 The Forest Fire Arrow uses a blaze rod instead of a stick and will start
 a 3x3x3 fire around its impact site. No special enchantment required!

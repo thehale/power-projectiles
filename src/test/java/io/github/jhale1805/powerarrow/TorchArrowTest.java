@@ -1,10 +1,9 @@
 
-package io.github.jhale1805.torcharrow;
+package io.github.jhale1805.powerarrow;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import io.github.jhale1805.PowerProjectilePlugin;
-import io.github.jhale1805.powerarrow.TorchArrow;
 
 import org.junit.*;
 import static org.junit.Assert.*;
