@@ -39,5 +39,5 @@ dependencies {
 }
 
 jar {
-  archiveVersion = '1.1.1'
+  archiveVersion = '1.2.0'
 }
