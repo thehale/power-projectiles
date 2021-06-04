@@ -5,8 +5,9 @@ import java.util.Arrays;
 public class PowerArrowRegistry {
     
     private static PowerArrow[] powerArrows = {
+        new ExplosiveArrow(),
+        new ForestFireArrow(),
         new TorchArrow(),
-        new ExplosiveArrow()
     };
 
     public static PowerArrow[] getPowerArrows() {
