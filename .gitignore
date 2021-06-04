@@ -10,3 +10,6 @@ bin
 .classpath
 .project
 .settings
+
+# Ignore plugin build tools
+spigot

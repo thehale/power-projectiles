@@ -1,0 +1,15 @@
+package io.github.jhale1805.powerarrow;
+
+import java.util.Arrays;
+
+public class PowerArrowRegistry {
+    
+    private static PowerArrow[] powerArrows = {
+        new TorchArrow()
+    };
+
+    public static PowerArrow[] getPowerArrows() {
+        return Arrays.copyOf(powerArrows, powerArrows.length);
+    }
+
+}

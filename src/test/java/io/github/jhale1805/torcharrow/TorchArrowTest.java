@@ -3,6 +3,8 @@ package io.github.jhale1805.torcharrow;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import io.github.jhale1805.PowerProjectilePlugin;
+import io.github.jhale1805.powerarrow.TorchArrow;
 
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -10,10 +12,10 @@ import static org.junit.Assert.*;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class TorchArrowStackTest {
+public class TorchArrowTest {
 
     private ServerMock server;
-    private TorchArrowPlugin plugin;
+    private PowerProjectilePlugin plugin;
 
     @BeforeClass
     public static void setUpClass() {
@@ -23,7 +25,7 @@ public class TorchArrowStackTest {
     @Before
     public void setUp() {
         server = MockBukkit.mock();
-        plugin = MockBukkit.load(TorchArrowPlugin.class);
+        plugin = MockBukkit.load(PowerProjectilePlugin.class);
     }
 
     @After
@@ -38,8 +40,8 @@ public class TorchArrowStackTest {
 
     @Test 
     public void test_isSimilar() {
-        TorchArrowStack test = new TorchArrowStack(4);
-        TorchArrowStack test2 = new TorchArrowStack(8);
+        TorchArrow test = new TorchArrow(4);
+        TorchArrow test2 = new TorchArrow(8);
         ItemStack arrow = new ItemStack(Material.ARROW, 4);
 
         assertTrue(test.isSimilar(test2));
@@ -48,8 +50,8 @@ public class TorchArrowStackTest {
 
     @Test
     public void test_equals() {
-        TorchArrowStack test = new TorchArrowStack(4);
-        TorchArrowStack test2 = new TorchArrowStack(8);
+        TorchArrow test = new TorchArrow(4);
+        TorchArrow test2 = new TorchArrow(8);
         ItemStack arrow = new ItemStack(Material.ARROW, 4);
         
         assertTrue(test.equals(test));
