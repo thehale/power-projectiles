@@ -11,15 +11,34 @@ Don't worry, Power Projectiles still work like regular projectiles, so you can
 use them to defend yourself from attacking mobs and players.
 
 ### Explosive Arrows
+
+<img src="resources/ExplosiveArrow.gif" width="600" height="320" />
+
 Add a little extra bang to your shot with arrows that create a mini TNT explosion
 upon impact! Requires a Flame enchanted bow to work.
 
 ### Forest Fire Arrows
+
+<img src="resources/ForestFireArrow.gif" width="600" height="320" />
+
 Harness the power of the blaze rod to engulf your enemies in flames!
 The Forest Fire Arrow uses a blaze rod instead of a stick and will start
 a 3x3x3 fire around its impact site. No special enchantment required!
 
+### Net Arrows
+
+<img src="resources/NetArrow.gif" width="600" height="320" />
+
+Drastically slow down your opponents by surrounding them with cobweb! 
+Surround a normal arrow with cobweb to get a Net Arrow that can be used
+with a regular bow!
+If you're worried about not having enough cobweb to craft these, don't 
+worry. This plugin also provides a recipe to craft cobweb.
+
 ### Torch Arrows
+
+<img src="resources/TorchArrow.gif" width="600" height="320" />
+
 Light up large caves or a dark countryside with Torch Arrows that place torches
 where they land! Requires a Flame enchanted bow to work.
 
@@ -36,3 +55,9 @@ where they land! Requires a Flame enchanted bow to work.
 2. Open a terminal in the root folder of the project.
 3. Build the jar: `gradle build`.
 4. Copy the generated jar from `./build/libs/power-projectiles.jar` into your server's `plugins` directory.
+
+### Adding new Power Projectiles
+Simply inherit from Power Arrow and implement the required abstract
+methods to make your own Power Arrow!
+
+Other types of Power Projectiles will come in the future.
