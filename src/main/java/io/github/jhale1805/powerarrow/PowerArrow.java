@@ -147,7 +147,7 @@ public abstract class PowerArrow extends ItemStack implements Listener {
 
     @EventHandler
     public void onPlayerAdvancementDone(PlayerAdvancementDoneEvent event) {
-        // Show the Torch Arrow in the recipe book upon completing the Enchanter advancement.
+        // Show the Power Arrow in the recipe book upon completing the Enchanter advancement.
         Advancement enchanter = Bukkit.getAdvancement(NamespacedKey.minecraft("story/enchant_item"));
         if (event.getAdvancement().equals(enchanter)) {
             event.getPlayer().discoverRecipe(this.getRecipeKey());
@@ -156,7 +156,7 @@ public abstract class PowerArrow extends ItemStack implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        // Show the Torch Arrow in the recipe book to those that have completed the Enchanter advancement.
+        // Show the Power Arrow in the recipe book to those that have completed the Enchanter advancement.
         Advancement enchanter = Bukkit.getAdvancement(NamespacedKey.minecraft("story/enchant_item"));
         if (event.getPlayer().getAdvancementProgress(enchanter).isDone()) {
             event.getPlayer().discoverRecipe(this.getRecipeKey());

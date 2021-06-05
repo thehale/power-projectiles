@@ -7,6 +7,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import io.github.jhale1805.powerarrow.*;
+import io.github.jhale1805.powerrecipe.*;
 
 public class PowerProjectilePlugin extends JavaPlugin {
 
@@ -37,11 +38,23 @@ public class PowerProjectilePlugin extends JavaPlugin {
         getLogger().info("Copyright 2021 by Joseph Hale (jhale1805). All Rights Reserved.");
         getLogger().info("Report issues to https://github.com/jhale1805/power-projectiles");
         getLogger().info("Loading all Power Projectiles.");
+        registerPowerArrows();
+        registerPowerRecipes();
+        getLogger().info("Ready!");
+    }
+
+    private void registerPowerArrows() {
         for (PowerArrow powerArrow : PowerArrowRegistry.getPowerArrows()) {
             getServer().getPluginManager().registerEvents(powerArrow, this);
             Bukkit.addRecipe(powerArrow.getRecipe());
         }
-        getLogger().info("Ready!");
+    }
+
+    private void registerPowerRecipes() {
+        for (PowerRecipe powerRecipe : PowerRecipeRegistry.getPowerRecipes()) {
+            getServer().getPluginManager().registerEvents(powerRecipe, this);
+            Bukkit.addRecipe(powerRecipe.getRecipe());
+        }
     }
 
     @Override

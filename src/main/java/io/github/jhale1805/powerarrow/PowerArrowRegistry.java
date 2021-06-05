@@ -7,6 +7,7 @@ public class PowerArrowRegistry {
     private static PowerArrow[] powerArrows = {
         new ExplosiveArrow(),
         new ForestFireArrow(),
+        new NetArrow(),
         new TorchArrow(),
     };
 

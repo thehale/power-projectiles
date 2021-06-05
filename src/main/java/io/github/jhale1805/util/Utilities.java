@@ -40,7 +40,7 @@ public class Utilities {
     public static Location getImpactLocation(ProjectileHitEvent event) {
         Location loc = null;
         if (event.getHitBlock() != null) {
-            loc = event.getHitBlock().getLocation();
+            loc = event.getHitBlock().getRelative(event.getHitBlockFace()).getLocation();
         } else if (event.getHitEntity() != null) {
             loc = event.getHitEntity().getLocation();
         }
@@ -70,7 +70,7 @@ public class Utilities {
 
         // Replace the blocks
         for (double dx = -radius; dx <= radius; dx++) {
-            for (double dy = 0; dy <= radius * 2 ; dy++) {
+            for (double dy = -radius; dy <= radius ; dy++) {
                 for (double dz = -radius; dz <= radius; dz++) {
                     Location toCheck = new Location(
                         centerPoint.getWorld(),
