@@ -7,12 +7,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Particle;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
@@ -20,6 +22,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import io.github.jhale1805.PowerProjectilePlugin;
 
@@ -48,7 +51,23 @@ public abstract class PowerArrow extends ItemStack implements Listener {
      */
     public abstract String[] getUsageInstructions();
 
+    /**
+     * Returns the crafting recipe for this Power Arrow.
+     * @return the crafting recipe for this Power Arrow.
+     */
     public abstract ShapedRecipe getRecipe();
+
+    /**
+     * Returns the type of particle used in the trail of this Power Arrow.
+     * 
+     * Defaults to `null` which will use the default arrow particle trail.
+     * Override this method in a subclass to specify your desired particle.
+     * 
+     * @return the type of particle used in the trail of this Power Arrow.
+     */
+    public Particle getTrailParticle() {
+        return null;
+    }
 
     public NamespacedKey getRecipeKey() {
         return new NamespacedKey(PowerProjectilePlugin.instance, "recipe/" + this.getName());
@@ -85,7 +104,45 @@ public abstract class PowerArrow extends ItemStack implements Listener {
         if (event.getConsumable().getItemMeta().equals(this.getItemMetadata())) {
             event.getProjectile().setMetadata("effect", this.getEntityMetadata());
             event.setConsumeItem(true);  // Ignore the effects of Infinity
+            if (this.getTrailParticle() != null) {
+                this.drawTrail(event.getProjectile(), this.getTrailParticle());
+            }
         }
+    }
+
+    @EventHandler
+    public void onProjectileHit(ProjectileHitEvent event) {
+        if ( !this.isSimilar(event.getEntity()) ) 
+            return;
+        
+        this.onThisProjectileHit(event);
+        event.getEntity().remove(); 
+    }
+
+    /**
+     * Creates the effect caused when this Power Arrow hits something.
+     * 
+     * This method is guaranteed to only be called when the Projectile is
+     * a power arrow of this type.
+     * 
+     * @param event The ProjectileHitEvent to process.
+     */
+    protected abstract void onThisProjectileHit(ProjectileHitEvent event);
+
+    private void drawTrail(Entity arrow, Particle particle) {
+        new BukkitRunnable(){
+            @Override
+            public void run() {
+                if (arrow.isDead() || arrow.isOnGround())
+                    this.cancel();
+                
+                arrow.getLocation().getWorld().spawnParticle(
+                    particle,
+                    arrow.getLocation(),
+                    5
+                );
+            }
+        }.runTaskTimer(PowerProjectilePlugin.instance, 0, 4);
     }
 
     @EventHandler

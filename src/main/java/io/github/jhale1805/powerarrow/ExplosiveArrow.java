@@ -2,9 +2,10 @@ package io.github.jhale1805.powerarrow;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ShapedRecipe;
+
+import io.github.jhale1805.util.Utilities;
 
 public class ExplosiveArrow extends PowerArrow {
 
@@ -38,28 +39,22 @@ public class ExplosiveArrow extends PowerArrow {
         return recipe;
     }
 
-    @EventHandler
-    public void onProjectileHit(ProjectileHitEvent event) {
+    @Override
+    protected void onThisProjectileHit(ProjectileHitEvent event) {
         // Check preconditions for explosion
-        if (!(this.isSimilar(event.getEntity())
-                && event.getEntity().getFireTicks() > 0)) 
+        if (!(event.getEntity().getFireTicks() > 0)) 
             return;
-        Location impactSite = null;
-        if (event.getHitBlock() != null) {
-            impactSite = event.getHitBlock().getLocation();
-        } else if (event.getHitEntity() != null) {
-            impactSite = event.getHitEntity().getLocation();
-        }
-        if (impactSite != null) {
+
+        Location impactLocation = Utilities.getImpactLocation(event);
+        if (impactLocation != null) {
             event.getEntity().getWorld().createExplosion(
-                impactSite,  // Cause the explosion where the arrow hit.
+                impactLocation,  // Cause the explosion where the arrow hit.
                 1F,          // Cause an explosion of 1/4th the power of TNT
                 false,       // Don't start fires
                 true,        // Do break blocks.
                 event.getEntity()
             );
         }
-        event.getEntity().remove(); 
     }
     
 }

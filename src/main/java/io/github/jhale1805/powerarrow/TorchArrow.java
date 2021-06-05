@@ -5,7 +5,6 @@ import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.RecipeChoice.MaterialChoice;
 import org.bukkit.inventory.ShapedRecipe;
@@ -42,11 +41,10 @@ public class TorchArrow extends PowerArrow {
         return recipe;
     }
 
-    @EventHandler
-    public void onProjectileHit(ProjectileHitEvent event) {
+    @Override
+    public void onThisProjectileHit(ProjectileHitEvent event) {
         // Check preconditions for torch placement
-        if (!(this.isSimilar(event.getEntity())
-                && event.getEntity().getFireTicks() > 0
+        if (!(event.getEntity().getFireTicks() > 0
                 && event.getHitBlock() != null
                 && event.getHitBlockFace() != null)) 
             return;
