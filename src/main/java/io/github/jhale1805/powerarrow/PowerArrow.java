@@ -18,7 +18,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
@@ -55,7 +55,7 @@ public abstract class PowerArrow extends ItemStack implements Listener {
      * Returns the crafting recipe for this Power Arrow.
      * @return the crafting recipe for this Power Arrow.
      */
-    public abstract ShapedRecipe getRecipe();
+    public abstract Recipe getRecipe();
 
     /**
      * Returns the type of particle used in the trail of this Power Arrow.

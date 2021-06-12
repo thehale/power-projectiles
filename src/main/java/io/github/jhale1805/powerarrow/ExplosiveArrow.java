@@ -3,7 +3,8 @@ package io.github.jhale1805.powerarrow;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.ShapelessRecipe;
 
 import io.github.jhale1805.util.Utilities;
 
@@ -28,14 +29,13 @@ public class ExplosiveArrow extends PowerArrow {
     }
 
     @Override
-    public ShapedRecipe getRecipe() {
-        ShapedRecipe recipe = new ShapedRecipe(
+    public Recipe getRecipe() {
+        ShapelessRecipe recipe = new ShapelessRecipe(
             this.getRecipeKey(),
-            new ExplosiveArrow(4)
+            new ExplosiveArrow(2)
         );
-        recipe.shape(" A ", "ATA", " A ");
-        recipe.setIngredient('T', Material.TNT);
-        recipe.setIngredient('A', Material.ARROW);
+        recipe.addIngredient(Material.TNT)
+              .addIngredient(2, Material.ARROW);
         return recipe;
     }
 
@@ -49,7 +49,7 @@ public class ExplosiveArrow extends PowerArrow {
         if (impactLocation != null) {
             event.getEntity().getWorld().createExplosion(
                 impactLocation,  // Cause the explosion where the arrow hit.
-                1F,          // Cause an explosion of 1/4th the power of TNT
+                2F,          // Cause an explosion of 1/2th the power of TNT
                 false,       // Don't start fires
                 true,        // Do break blocks.
                 event.getEntity()

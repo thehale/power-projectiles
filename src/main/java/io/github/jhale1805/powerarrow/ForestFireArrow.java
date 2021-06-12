@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 
 import io.github.jhale1805.util.Utilities;
@@ -29,7 +30,7 @@ public class ForestFireArrow extends PowerArrow {
     }
 
     @Override
-    public ShapedRecipe getRecipe() {
+    public Recipe getRecipe() {
         ShapedRecipe recipe = new ShapedRecipe(
             this.getRecipeKey(),
             new ForestFireArrow()

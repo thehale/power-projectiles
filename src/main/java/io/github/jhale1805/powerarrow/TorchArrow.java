@@ -7,6 +7,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.RecipeChoice.MaterialChoice;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 
 public class TorchArrow extends PowerArrow {
@@ -30,7 +31,7 @@ public class TorchArrow extends PowerArrow {
     }
     
     @Override
-    public ShapedRecipe getRecipe() {
+    public Recipe getRecipe() {
         ShapedRecipe recipe = new ShapedRecipe(
             this.getRecipeKey(),
             new TorchArrow(4)
@@ -54,7 +55,6 @@ public class TorchArrow extends PowerArrow {
         } else {
             placeTorch(event);
         }
-        event.getEntity().remove(); 
     }
 
     private void dropTorchArrow(ProjectileHitEvent event) {
