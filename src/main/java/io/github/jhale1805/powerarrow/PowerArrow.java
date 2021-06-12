@@ -47,7 +47,7 @@ public abstract class PowerArrow extends ItemStack implements Listener {
      * Each PowerArrow's usage instructions are shown in its lore.
      * 
      * Instructions should be no more than 3 lines of 20 characters.
-     * @return the instructions for using this PowerArrow.
+     * @return the instructions for using this Power Arrow.
      */
     public abstract String[] getUsageInstructions();
 
@@ -107,8 +107,19 @@ public abstract class PowerArrow extends ItemStack implements Listener {
             if (this.getTrailParticle() != null) {
                 this.drawTrail(event.getProjectile(), this.getTrailParticle());
             }
+            this.onThisProjectileShot(event);
         }
     }
+
+    /**
+     * Creates the effect caused when this Power Arrow is shot.
+     * 
+     * This method is guaranteed to only be called when the Projectile is
+     * a power arrow of this type.
+     * 
+     * @param event The EntityShootBowEvent to process.
+     */
+    protected void onThisProjectileShot(EntityShootBowEvent event) {}
 
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent event) {
@@ -127,7 +138,7 @@ public abstract class PowerArrow extends ItemStack implements Listener {
      * 
      * @param event The ProjectileHitEvent to process.
      */
-    protected abstract void onThisProjectileHit(ProjectileHitEvent event);
+    protected void onThisProjectileHit(ProjectileHitEvent event) {}
 
     private void drawTrail(Entity arrow, Particle particle) {
         new BukkitRunnable(){
