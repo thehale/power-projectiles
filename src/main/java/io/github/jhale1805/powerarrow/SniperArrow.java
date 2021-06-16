@@ -2,11 +2,28 @@ package io.github.jhale1805.powerarrow;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import io.github.jhale1805.PowerProjectilePlugin;
 
 public class SniperArrow extends PowerArrow {
+
+    /**
+     * How many times faster to fly than a normal arrow.
+     */
+    private static final int VELOCITY_MULTIPLIER = 3;
+
+    /**
+     * How many ticks to stay in the air.
+     * 
+     * Important since Sniper Arrows aren't affected by gravity and thus
+     * might never hit the ground.
+     */
+    private static final int TIMEOUT_DELAY = 400;
 
     public SniperArrow() {
         super();
@@ -42,8 +59,15 @@ public class SniperArrow extends PowerArrow {
     @Override
     protected void onThisProjectileShot(EntityShootBowEvent event) {
         if (event.getBow().containsEnchantment(Enchantment.ARROW_DAMAGE)) {
-            event.getProjectile().setGravity(false);
-            event.getProjectile().getVelocity().multiply(3);
+            Entity arrow = event.getProjectile();
+            arrow.setGravity(false);
+            arrow.getVelocity().multiply(VELOCITY_MULTIPLIER);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    arrow.remove();
+                }
+            }.runTaskLater(PowerProjectilePlugin.instance, TIMEOUT_DELAY);
         }
     }
     
