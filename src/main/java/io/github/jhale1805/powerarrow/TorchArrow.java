@@ -66,8 +66,10 @@ public class TorchArrow extends PowerArrow {
 
     private void placeTorch(ProjectileHitEvent event) {
         // Compute torch orientation
-        BlockData torch = Material.TORCH.createBlockData();
-        if (!event.getHitBlockFace().equals(BlockFace.UP)) {
+        BlockData torch = null;
+        if (event.getHitBlockFace().equals(BlockFace.UP)) {
+            torch = Material.TORCH.createBlockData();
+        } else {
             torch = Material.WALL_TORCH.createBlockData();
             ((Directional) torch).setFacing(event.getHitBlockFace());
         }
