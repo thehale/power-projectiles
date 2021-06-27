@@ -30,7 +30,7 @@ public abstract class PowerArrow extends ItemStack implements Listener {
 
     public PowerArrow() {
         super(Material.ARROW);
-        this.setItemMeta(this.getItemMetadata());
+        this.setItemMeta(this.getItemMeta());
     }
 
     public PowerArrow(int count) {
@@ -77,7 +77,8 @@ public abstract class PowerArrow extends ItemStack implements Listener {
         return new NamespacedKey(PowerProjectilePlugin.instance, this.getName());
     }
 
-    public ItemMeta getItemMetadata() {
+    @Override
+    public ItemMeta getItemMeta() {
         ItemMeta itemMetadata = new ItemStack(Material.ARROW).getItemMeta();
         itemMetadata.setDisplayName(this.getDisplayName());
         itemMetadata.setLore(Arrays.asList(this.getUsageInstructions()));
@@ -90,7 +91,8 @@ public abstract class PowerArrow extends ItemStack implements Listener {
         for (String part : nameParts) {
             displayName += Character.toUpperCase(part.charAt(0)) 
                     + part.substring(1)
-                    + " ";
+                    // Don't add a space after the last name part 
+                    + (nameParts[nameParts.length - 1].equals(part) ? "" : " ");
         }
         return displayName;
     }
@@ -101,7 +103,7 @@ public abstract class PowerArrow extends ItemStack implements Listener {
 
     @EventHandler
     public void onEntityShootBow(EntityShootBowEvent event) {
-        if (event.getConsumable().getItemMeta().equals(this.getItemMetadata())) {
+        if (event.getConsumable().getItemMeta().equals(this.getItemMeta())) {
             event.getProjectile().setMetadata("effect", this.getEntityMetadata());
             event.setConsumeItem(true);  // Ignore the effects of Infinity
             if (this.getTrailParticle() != null) {
@@ -123,7 +125,7 @@ public abstract class PowerArrow extends ItemStack implements Listener {
 
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent event) {
-        if ( !this.isSimilar(event.getEntity()) ) 
+        if ( !this.isCorrespondingArrowOf(event.getEntity()) ) 
             return;
         
         this.onThisProjectileHit(event);
@@ -184,7 +186,7 @@ public abstract class PowerArrow extends ItemStack implements Listener {
      * @param entity The entity to assess.
      * @return true if the entity is a PowerArrow of this type.
      */
-    public boolean isSimilar(Entity entity) {
+    public boolean isCorrespondingArrowOf(Entity entity) {
         return entity instanceof Arrow 
             && entity.getMetadata("effect")
                     .stream()

@@ -15,19 +15,17 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 
 public class TorchArrowTest {
 
     private static ServerMock mockServer;
-    private static PowerProjectilePlugin plugin;
 
     @BeforeClass
     public static void setUpClass() {
         mockServer = spy(new ServerMock());  // Fill in ServerMock's missing methods.
         MockBukkit.mock(mockServer);
-        plugin = MockBukkit.load(PowerProjectilePlugin.class);
+        MockBukkit.load(PowerProjectilePlugin.class);
     }
 
     @Before
@@ -66,27 +64,6 @@ public class TorchArrowTest {
         Recipe recipe = new TorchArrow().getRecipe();
         assertNotNull(recipe);
         assertTrue(recipe.getResult().isSimilar(new TorchArrow()));
-    }
-
-    @Test 
-    public void test_isSimilar() {
-        TorchArrow test = new TorchArrow(4);
-        TorchArrow test2 = new TorchArrow(8);
-        ItemStack arrow = new ItemStack(Material.ARROW, 4);
-
-        assertTrue(test.isSimilar(test2));
-        assertFalse(test.isSimilar(arrow));
-    }
-
-    @Test
-    public void test_equals() {
-        TorchArrow test = new TorchArrow(4);
-        TorchArrow test2 = new TorchArrow(8);
-        ItemStack arrow = new ItemStack(Material.ARROW, 4);
-        
-        assertTrue(test.equals(test));
-        assertFalse(test.equals(test2));
-        assertFalse(test.isSimilar(arrow));
     }
 
     @Test
