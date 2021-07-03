@@ -27,7 +27,7 @@ public class TorchArrow extends PowerArrow {
 
     @Override
     public String[] getUsageInstructions() {
-        return new String[]{"Shoot with Flame to", "place a torch."};
+        return new String[]{"Places a torch when", "shot with Flame."};
     }
     
     @Override

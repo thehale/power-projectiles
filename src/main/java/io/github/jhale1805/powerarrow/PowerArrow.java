@@ -203,5 +203,10 @@ public abstract class PowerArrow extends ItemStack implements Listener {
         ItemStack other = (ItemStack) obj;
         return isSimilar(other) && other.getAmount() == this.getAmount();
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
     
 }

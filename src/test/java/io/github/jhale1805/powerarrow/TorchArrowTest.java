@@ -6,7 +6,6 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import io.github.jhale1805.PowerProjectilePlugin;
 
 import org.junit.*;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import org.bukkit.Location;
@@ -15,7 +14,6 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.inventory.Recipe;
 
 public class TorchArrowTest {
 
@@ -28,42 +26,9 @@ public class TorchArrowTest {
         MockBukkit.load(PowerProjectilePlugin.class);
     }
 
-    @Before
-    public void setUp() {
-        
-    }
-
-    @After
-    public void tearDown() {
-        
-    }
-
     @AfterClass
     public static void tearDownClass() {
         MockBukkit.unmock();
-    }
-
-    @Test
-    public void test_getName() {
-        String name = new TorchArrow().getName();
-        assertTrue(!name.contains(" "));
-        assertTrue(name.equals(name.toLowerCase()));
-    }
-
-    @Test
-    public void test_getUsageInstructions() {
-        String[] instructions = new TorchArrow().getUsageInstructions();
-        assertTrue(instructions.length <= 3);
-        for (String line : instructions) {
-            assertTrue(line.length() <= 20);
-        }
-    }
-
-    @Test
-    public void test_getRecipe() {
-        Recipe recipe = new TorchArrow().getRecipe();
-        assertNotNull(recipe);
-        assertTrue(recipe.getResult().isSimilar(new TorchArrow()));
     }
 
     @Test

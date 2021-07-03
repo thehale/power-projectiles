@@ -26,7 +26,7 @@ public class TeleportArrow extends PowerArrow {
 
     @Override
     public String[] getUsageInstructions() {
-        return new String[] {"Teleports you to", "where it lands"};
+        return new String[] {"Teleports you to", "where it lands."};
     }
 
     @Override

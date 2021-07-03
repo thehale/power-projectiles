@@ -40,7 +40,7 @@ public class SniperArrow extends PowerArrow {
 
     @Override
     public String[] getUsageInstructions() {
-        return new String[] {"Fire with Power to", "hit crosshair target."};
+        return new String[] {"Directly hits target", "in crosshairs when", "shot with Power."};
     }
 
     @Override
