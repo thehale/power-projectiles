@@ -15,7 +15,7 @@ public class SniperArrow extends PowerArrow {
     /**
      * How many times faster to fly than a normal arrow.
      */
-    private static final int VELOCITY_MULTIPLIER = 3;
+    private static final double VELOCITY_MULTIPLIER = 3.0;
 
     /**
      * How many ticks to stay in the air.
