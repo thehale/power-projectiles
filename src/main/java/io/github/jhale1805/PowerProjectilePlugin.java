@@ -13,6 +13,7 @@ public class PowerProjectilePlugin extends JavaPlugin {
 
     public static PowerProjectilePlugin instance;
     public final static String NAME = "PowerProjectile";
+    public final static int BSTATS_PLUGIN_ID = 12003;
 
     /**
      * Default constructor.
@@ -40,6 +41,7 @@ public class PowerProjectilePlugin extends JavaPlugin {
         getLogger().info("Loading all Power Projectiles.");
         registerPowerArrows();
         registerPowerRecipes();
+        new Metrics(this, BSTATS_PLUGIN_ID);  // Enable bStats metrics
         getLogger().info("Ready!");
     }
 
