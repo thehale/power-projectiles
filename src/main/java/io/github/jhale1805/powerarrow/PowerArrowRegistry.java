@@ -9,6 +9,7 @@ public class PowerArrowRegistry {
         new ForestFireArrow(),
         new NetArrow(),
         new SniperArrow(),
+        new SwapArrow(),
         new TeleportArrow(),
         new TorchArrow(),
     };
