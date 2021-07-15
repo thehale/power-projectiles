@@ -25,3 +25,9 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+    - name: Upload built .jar as artifact
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: power-projectiles.jar
+        path: build/libs/power-projectiles-*.jar
+        if-no-files-found: error
