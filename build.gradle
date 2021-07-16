@@ -1,8 +1,20 @@
-plugins {
-    id 'java-library'
-    id 'jacoco'
+// Configure the dependencies of this gradle build script.
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.yaml:snakeyaml:1.29'
+  }
 }
 
+// Configure the plugins needed for building this project.
+plugins {
+  id 'java-library'
+  id 'jacoco'
+}
+
+// Configure the dependencies of this project.
 repositories {
   jcenter()
 
@@ -30,23 +42,29 @@ repositories {
   maven { url 'https://hub.spigotmc.org/nexus/content/repositories/public/' }  // Repo for MockBukkit
   mavenLocal() // This is needed for CraftBukkit and Spigot.
 }
-
-
 dependencies {
+
+  // Required for the Minecraft Plugin
   implementation 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT' // The Spigot API with no shadowing. Requires the OSS repo.
+
   // Unit testing packages
   testImplementation 'junit:junit:4.12'
   testImplementation 'com.github.seeseemelk:MockBukkit-v1.16:1.0.0'  // MockBukkit server required for Unit Testing
   testImplementation "org.mockito:mockito-inline:3.+"  // Used for Unit Testing, this particular artifact can mock final methods.
+
 }
+
+// Read in the plugin.yml file for the Minecraft Plugin.
+// Aided by https://stackoverflow.com/a/48320319/14765128
+import org.yaml.snakeyaml.Yaml;
+def pluginConfig = new Yaml().load( new File("src/main/resources/plugin.yml").newInputStream() )
 
 jar {
-  archiveVersion = '1.7.0'
+  archiveVersion = pluginConfig.version
 }
 
-//////////////////////////////////////////////////////////////////////
 // Configure Jacoco
 // Copied from https://docs.gradle.org/current/userguide/jacoco_plugin.html
 test {
-    finalizedBy jacocoTestReport // report is always generated after tests run
+  finalizedBy jacocoTestReport // report is always generated after tests run
 }
