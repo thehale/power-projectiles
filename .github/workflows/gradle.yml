@@ -28,6 +28,14 @@ jobs:
     - name: Upload built .jar as artifact
       uses: actions/upload-artifact@v2.2.4
       with:
-        name: power-projectiles.jar
+        name: power-projectiles
         path: build/libs/power-projectiles-*.jar
         if-no-files-found: error
+    - name: Publish draft release
+      uses: softprops/action-gh-release@v1
+      with:
+        draft: True
+        files: build/libs/power-projectiles-*.jar
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_REPOSITORY: jhale1805/power-projectiles
