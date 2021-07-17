@@ -47,30 +47,34 @@ jobs:
         name: power-projectiles
         path: build/libs/power-projectiles-*.jar
         if-no-files-found: error
-    - name: 5. Generate current changelog
+    - name: 5. Determine whether or not to produce a release.
+      id: determine_release
+      run: echo "PRODUCE_RELEASE=${{steps.build.outputs.is_new_version == 'true'
+        && github.event_name == 'push'
+        && github.ref == 'refs/heads/master'
+        && github.repository == 'jhale1805/power-projectiles'
+        && !contains(toJSON(github.event.commits.*.message), '[skip release]')}} >> $GITHUB_ENV"
+    - name: 6. Generate changelog [RELEASE ONLY]
       id: changelog
+      if: env.PRODUCE_RELEASE == true
       run: ./gradlew generateChangelog
-    - name: 6. Upload current changelog as artifact
+    - name: 7. Upload changelog as artifact [RELEASE ONLY]
       id: upload_changelog
+      if: env.PRODUCE_RELEASE == true
       uses: actions/upload-artifact@v2.2.4
       with:
         name: changelog
         path: build/changelog-clean.md
         if-no-files-found: warn
-    - name: 7. Publish Draft Release
+    - name: 8. Publish release [RELEASE ONLY]
       id: release
-      if: steps.build.outputs.is_new_version == 'true'
-        && github.event_name == 'push'
-        && github.ref == 'refs/heads/master'
-        && github.repository == 'jhale1805/power-projectiles'
-        && !contains(toJSON(github.event.commits.*.message), '[skip release]')
+      if: env.PRODUCE_RELEASE == true
       uses: softprops/action-gh-release@v1
       with:
-        draft: True
         tag_name: ${{ steps.build.outputs.version }}
         body_path: build/changelog-clean.md
         files: build/libs/power-projectiles-*.jar
-        fail_on_unmatched_files: True
+        # fail_on_unmatched_files: True  # Documented, but not yet released. See: https://github.com/softprops/action-gh-release/issues/80
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_REPOSITORY: jhale1805/power-projectiles
