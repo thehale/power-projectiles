@@ -56,11 +56,11 @@ jobs:
         && !contains(toJSON(github.event.commits.*.message), '[skip release]')}} >> $GITHUB_ENV"
     - name: 6. Generate changelog [RELEASE ONLY]
       id: changelog
-      if: env.PRODUCE_RELEASE == true
+      if: env.PRODUCE_RELEASE == 'true'
       run: ./gradlew generateChangelog
     - name: 7. Upload changelog as artifact [RELEASE ONLY]
       id: upload_changelog
-      if: env.PRODUCE_RELEASE == true
+      if: env.PRODUCE_RELEASE == 'true'
       uses: actions/upload-artifact@v2.2.4
       with:
         name: changelog
@@ -68,7 +68,7 @@ jobs:
         if-no-files-found: warn
     - name: 8. Publish release [RELEASE ONLY]
       id: release
-      if: env.PRODUCE_RELEASE == true
+      if: env.PRODUCE_RELEASE == 'true'
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ steps.build.outputs.version }}
