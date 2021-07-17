@@ -1,8 +1,23 @@
-plugins {
-    id 'java-library'
-    id 'jacoco'
+// Configure the dependencies of this gradle build script.
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.yaml:snakeyaml:1.29'  // To manipulate the plugin.yml
+    // auto-version MUST be here so I can apply it *after* setting the project version.
+    classpath 'org.shipkit:shipkit-auto-version:1.1.19'  // Discovers last released version
+  }
 }
 
+// Configure the plugins needed for building this project.
+plugins {
+  id 'java-library'
+  id 'jacoco'
+  id 'org.shipkit.shipkit-changelog' version '1.1.15'      // Auto-generates the Changelog
+}
+
+// Configure the dependencies of this project.
 repositories {
   jcenter()
 
@@ -30,23 +45,93 @@ repositories {
   maven { url 'https://hub.spigotmc.org/nexus/content/repositories/public/' }  // Repo for MockBukkit
   mavenLocal() // This is needed for CraftBukkit and Spigot.
 }
-
-
 dependencies {
+
+  // Required for the Minecraft Plugin
   implementation 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT' // The Spigot API with no shadowing. Requires the OSS repo.
+
   // Unit testing packages
   testImplementation 'junit:junit:4.12'
   testImplementation 'com.github.seeseemelk:MockBukkit-v1.16:1.0.0'  // MockBukkit server required for Unit Testing
   testImplementation "org.mockito:mockito-inline:3.+"  // Used for Unit Testing, this particular artifact can mock final methods.
+
+}
+
+// Set up global variables.
+project.ext {
+  repository = 'jhale1805/power-projectiles'
+}
+// Project version MUST be manually set *before* applying the auto-version plugin
+project.version = getPluginYml().version  
+apply plugin: 'org.shipkit.shipkit-auto-version'
+
+test {
+  finalizedBy jacocoTestReport // report is always generated after tests run
 }
 
 jar {
-  archiveVersion = '1.6.1'
+  archiveVersion = project.version
 }
 
-//////////////////////////////////////////////////////////////////////
-// Configure Jacoco
-// Copied from https://docs.gradle.org/current/userguide/jacoco_plugin.html
-test {
-    finalizedBy jacocoTestReport // report is always generated after tests run
+task version {
+  doLast {
+    println project.version
+  }
+}
+
+task isNewVersion {
+  doLast {
+    println isNewVersion()
+  }
+}
+
+task cleanupChangelog (dependsOn: 'generateChangelog') {
+  ext {
+    outputFile = new File(project.buildDir, "changelog-clean.md")
+  }
+  
+  doLast {  // i.e. only if `gradle cleanupChangelog` is run
+    // Clean up the changelog.
+    def cleanedChangelog = generateChangelog.outputFile.text
+    cleanedChangelog = cleanedChangelog.replaceAll(/<sup>.*<\/sup>\n\n/, "")  // Debrand
+    cleanedChangelog = cleanedChangelog.replaceAll(/####.*\n/, "")  // Remove redundant heading.
+    logger.lifecycle('Saving cleaned up changelog to file: {}', cleanupChangelog.outputFile)
+    ext.outputFile.write(cleanedChangelog)
+  }
+}
+
+generateChangelog {
+  previousRevision = project.ext.'shipkit-auto-version.previous-tag'
+  githubToken = System.getenv("GITHUB_TOKEN")
+  repository = project.ext.repository
+
+  finalizedBy cleanupChangelog
+}
+
+boolean isNewVersion() {
+  def last_released_version = project.ext.'shipkit-auto-version.previous-version'
+  def latestVersion = mostRecentVersion([last_released_version, project.version])
+  def isNew = latestVersion == project.version && latestVersion != last_released_version
+  logger.lifecycle('Last released version was ' + last_released_version 
+                 + ' and current version is ' + project.version 
+                 + ' therefore this ' + (isNew ? 'is' : 'is not')
+                 + ' a new version.' )
+  return isNew
+}
+
+String mostRecentVersion( List versions ) {
+  // Copied from https://stackoverflow.com/a/7737400/14765128
+  versions.sort( false ) { a, b ->
+    [a,b]*.tokenize('.')*.collect { it as int }.with { u, v ->
+      [u,v].transpose().findResult{ x,y-> x<=>y ?: null } ?: u.size() <=> v.size()
+    }
+  }[-1]
+}
+
+def getPluginYml() {
+  // Read in the plugin.yml file for the Minecraft Plugin.
+  // Aided by https://stackoverflow.com/a/48320319/14765128
+  String PLUGIN_YML_PATH = "src/main/resources/plugin.yml"
+  InputStream pluginYml = new File(PLUGIN_YML_PATH).newInputStream()
+  return new org.yaml.snakeyaml.Yaml().load(pluginYml)
 }

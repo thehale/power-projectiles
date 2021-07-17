@@ -2,40 +2,44 @@ package io.github.jhale1805.powerarrow;
 
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapelessRecipe;
 
-public class TeleportArrow extends PowerArrow {
+import io.github.jhale1805.util.Utilities;
+
+public class SwapArrow extends PowerArrow {
 
     public static final int TELEPORT_DAMAGE = 5;  // Standard Ender Pearl damage
 
-    public TeleportArrow() {
+    public SwapArrow() {
         super();
     }
 
-    public TeleportArrow(int count) {
+    public SwapArrow(int count) {
         super(count);
     }
 
     @Override
     public String getName() {
-        return "teleport_arrow";
+        return "swap_arrow";
     }
 
     @Override
     public String[] getUsageInstructions() {
-        return new String[] {"Teleports you to", "where it lands."};
+        return new String[] {"Swaps your location", "with the hit target"};
     }
 
     @Override
     public Recipe getRecipe() {
         ShapelessRecipe recipe = new ShapelessRecipe(
             this.getRecipeKey(),
-            new TeleportArrow()
+            new SwapArrow()
         );
-        recipe.addIngredient(Material.ENDER_PEARL)
+        recipe.addIngredient(2, Material.ENDER_PEARL)
               .addIngredient(Material.ARROW);
         return recipe;
     }
@@ -47,15 +51,16 @@ public class TeleportArrow extends PowerArrow {
 
     @Override
     protected void onThisProjectileHit(ProjectileHitEvent event) {
+        Entity hitEntity = event.getHitEntity();
         Player shooter = (Player) event.getEntity().getShooter();
-        shooter.teleport(event.getEntity().getLocation());
-        event.getEntity().getWorld().spawnParticle(
-            this.getTrailParticle(), 
-            event.getEntity().getLocation(), 
-            100
-        );
 
-        shooter.damage(TELEPORT_DAMAGE);
+        if (hitEntity != null && hitEntity instanceof LivingEntity
+                && shooter != null) {
+            Utilities.swapEntityLocations(shooter, hitEntity);
+            shooter.damage(TELEPORT_DAMAGE);
+            ((LivingEntity) hitEntity).damage(TELEPORT_DAMAGE);
+        }
+
     }
     
 }

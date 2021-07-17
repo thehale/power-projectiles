@@ -1,0 +1,76 @@
+#
+# CI build that assembles artifacts and runs tests.
+# If validation is successful this workflow releases from the main dev branch.
+#
+# - skipping CI: add [skip ci] to the commit message
+# - skipping release: add [skip release] to the commit message
+#
+# Partially inspired by the GitHub Actions script for mockito/mockito
+# https://github.com/mockito/mockito/blob/main/.github/workflows/ci.yml
+#
+
+name: CI/CD
+
+on:
+  push:
+    branches: [ master, dev ]
+  pull_request:
+    branches: [ master, dev ]
+
+jobs:
+  
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 1. Clone repository
+      id: clone
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: '0' # https://github.com/shipkit/shipkit-changelog#fetch-depth-on-ci
+    - name: 2. Set up JDK 11
+      id: jdk
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: 3. Build with Gradle
+      id: build
+      run: |
+        chmod +x gradlew
+        ./gradlew build
+        echo "::set-output name=version::v$(./gradlew version -q)"
+        echo "::set-output name=is_new_version::$(./gradlew isNewVersion -q)"
+    - name: 4. Upload built .jar as artifact
+      id: upload_jar
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: power-projectiles
+        path: build/libs/power-projectiles-*.jar
+        if-no-files-found: error
+    - name: 5. Generate current changelog
+      id: changelog
+      run: ./gradlew generateChangelog
+    - name: 6. Upload current changelog as artifact
+      id: upload_changelog
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: changelog
+        path: build/changelog-clean.md
+        if-no-files-found: warn
+    - name: 7. Publish Draft Release
+      id: release
+      if: steps.build.outputs.is_new_version == 'true'
+        && github.event_name == 'push'
+        && github.ref == 'refs/heads/master'
+        && github.repository == 'jhale1805/power-projectiles'
+        && !contains(toJSON(github.event.commits.*.message), '[skip release]')
+      uses: softprops/action-gh-release@v1
+      with:
+        draft: True
+        tag_name: ${{ steps.build.outputs.version }}
+        body_path: build/changelog-clean.md
+        files: build/libs/power-projectiles-*.jar
+        fail_on_unmatched_files: True
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_REPOSITORY: jhale1805/power-projectiles

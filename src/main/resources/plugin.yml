@@ -1,4 +1,6 @@
+---  # Denotes the start of this YAML document. https://yaml.org/spec/1.2/spec.html#id2760395
 name: PowerProjectile
 main: io.github.jhale1805.PowerProjectilePlugin
-version: 1.6.1
+version: 1.7.0
 api-version: 1.16
+... # Denotes the end of this YAML document. https://yaml.org/spec/1.2/spec.html#id2760395

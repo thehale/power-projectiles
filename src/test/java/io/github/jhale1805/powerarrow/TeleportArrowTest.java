@@ -1,4 +1,3 @@
-
 package io.github.jhale1805.powerarrow;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
