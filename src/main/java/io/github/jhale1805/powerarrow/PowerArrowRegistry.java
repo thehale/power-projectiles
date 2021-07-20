@@ -12,6 +12,7 @@ public class PowerArrowRegistry {
         new SwapArrow(),
         new TeleportArrow(),
         new TorchArrow(),
+        new WitherArrow(),
     };
 
     public static PowerArrow[] getPowerArrows() {
