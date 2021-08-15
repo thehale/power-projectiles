@@ -7,7 +7,8 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 
-import io.github.jhale1805.util.Utilities;
+import io.github.jhale1805.util.BlockTools;
+import io.github.jhale1805.util.EventTools;
 
 public class ForestFireArrow extends PowerArrow {
 
@@ -49,9 +50,9 @@ public class ForestFireArrow extends PowerArrow {
 
     @Override
     protected void onThisProjectileHit(ProjectileHitEvent event) {
-        Location impactLocation = Utilities.getImpactLocation(event);
+        Location impactLocation = EventTools.getImpactLocation(event);
         if (impactLocation != null) {
-            Utilities.replaceAirWith(Material.FIRE, impactLocation, 1);
+            BlockTools.replaceAirWith(Material.FIRE, impactLocation, 1);
         }
     }
     
