@@ -1,46 +1,23 @@
 # Power Projectiles
 This is a Minecraft Plugin for Bukkit/Paper/Spigot servers that adds several new
-super-powered projectiles.
+super-powered projectiles that make the standard potion tipped arrows look boring.
 
 ## Crafting and Use
 As long as a player has gotten the Enchanter advancement, he/she can also see 
 the recipe for all Power Projectiles. Each projectile's lore (the text below its
 name) contains instructions for how to use it.
 
-Don't worry, Power Projectiles still work like regular projectiles, so you can
-use them to defend yourself from attacking mobs and players.
-
-### Explosive Arrows
-
-<img src="resources/ExplosiveArrow.gif" width="600" height="320" />
-
-Add a little extra bang to your shot with arrows that create a mini TNT explosion
-upon impact! Requires a Flame enchanted bow to work.
-
-### Forest Fire Arrows
-
-<img src="resources/ForestFireArrow.gif" width="600" height="320" />
-
-Harness the power of the blaze rod to engulf your enemies in flames!
-The Forest Fire Arrow uses a blaze rod instead of a stick and will start
-a 3x3x3 fire around its impact site. No special enchantment required!
-
-### Net Arrows
-
-<img src="resources/NetArrow.gif" width="600" height="320" />
-
-Drastically slow down your opponents by surrounding them with cobweb! 
-Surround a normal arrow with cobweb to get a Net Arrow that can be used
-with a regular bow!
-If you're worried about not having enough cobweb to craft these, don't 
-worry. This plugin also provides a recipe to craft cobweb.
-
-### Torch Arrows
-
-<img src="resources/TorchArrow.gif" width="600" height="320" />
-
-Light up large caves or a dark countryside with Torch Arrows that place torches
-where they land! Requires a Flame enchanted bow to work.
+## The Projectiles
+| Name | Effect | Gif |
+|------|--------|-----|
+|💥 **Explosive Arrow** | Causes a small explosion on impact. | <img src="resources/ExplosiveArrow.gif" width="300" height="160" /> |
+|🔥 **Forest Fire Arrow** | Starts a medium sized fire on impact. | <img src="resources/ForestFireArrow.gif" width="300" height="160" /> |
+|⛓ **Jail Arrow** | Surrounds a hit enemy with iron bars. *NEW in v1.8.0!* | ![Jail Arrow Example](https://user-images.githubusercontent.com/47901316/126048412-2e14253c-e66d-4263-928d-c38c6a9b981c.png) |
+|🕸 **Net Arrow** | Places cobwebs on impact to drastically slow down your enemies. | <img src="resources/NetArrow.gif" width="300" height="160" /> |
+|🎯 **Sniper Arrow** | Ignores gravity and flies extra fast to directly hit targets in your crosshairs. | Example image not yet available |
+|👥 **Swap Arrow** | Causes you and a hit enemy to trade locations on the map. | Example image not yet available |
+|🤸‍♀️ **Teleport Arrow** | Teleports you to wherever it lands. | Example image not yet available |
+|🕯 **Torch Arrow** | Places a torch wherever it lands. | <img src="resources/TorchArrow.gif" width="300" height="160" /> |
 
 ## Installation
 1. Download the [latest release](https://github.com/jhale1805/power-projectiles/releases/) of Power Projectiles from GitHub Releases.
