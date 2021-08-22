@@ -1,5 +1,5 @@
 // From https://github.com/Bastian/bStats-Metrics/blob/40c234fe8213fb90600261dc882832490ee2130b/bukkit/Metrics.java
-package io.github.jhale1805;
+package io.github.jhale1805.bstats;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
