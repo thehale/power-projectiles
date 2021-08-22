@@ -24,8 +24,8 @@ public class Incrementor implements Iterable<Integer> {
         
         @Override
         public boolean hasNext() {
-            if (start < end) return current - end > 1;
-            else if (start > end) return end - current > 1;
+            if (start <= end) return current <= end;
+            else if (start >= end) return current >= end;
             else return false;
         }
 
@@ -33,8 +33,8 @@ public class Incrementor implements Iterable<Integer> {
         public Integer next() {
             int out = current;
 
-            if (current < end) current++;
-            else if (current > end) current--;
+            if (start <= end) current++;
+            else if (start >= end) current--;
             else;  // Nothing to increment towards.
             
             return out;

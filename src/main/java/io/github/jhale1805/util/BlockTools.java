@@ -16,7 +16,6 @@ public class BlockTools {
         if (newMaterial == null) throw new IllegalArgumentException("You must specify a newMaterial!");
         if (loc1 == null || loc2 == null) throw new IllegalArgumentException("You must specify a complete bounding box!");
         if (!loc1.getWorld().equals(loc2.getWorld())) throw new IllegalArgumentException("loc1 and loc2 must be in the same world!");
-        
         // Replace the blocks
         for (Integer x : new Incrementor(loc1.getBlockX(), loc2.getBlockX())) {
             for (Integer y : new Incrementor(loc1.getBlockY(), loc2.getBlockY())) {

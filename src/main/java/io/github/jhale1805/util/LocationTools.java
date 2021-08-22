@@ -20,4 +20,54 @@ public class LocationTools {
         }
     }
 
+    /**
+     * Creates a new location based at the block coordinates of the 
+     * given location.
+     * @param loc The base location.
+     * @return a new location based at the block coordinates of the 
+     * given location.
+     */
+    public static Location blockCoordsOf(Location loc) {
+        Location out = new Location(
+            loc.getWorld(), 
+            loc.getBlockX(), 
+            loc.getBlockY(),
+            loc.getBlockZ()
+        );
+        return out;
+    }
+
+    /**
+     * Creates a new location at the base coordinates plus the given
+     * coordinate deltas.
+     * 
+     * @param base The base lcoation.
+     * @param dx The change in x to apply to the new location.
+     * @param dy The change in y to apply to the new location.
+     * @param dz The change in z to apply to the new location.
+     * @return A new location translated from the given base by the given deltas
+     */
+    public static Location addImmutable(Location base, double dx, double dy, double dz) {
+        Location out = new Location(
+            base.getWorld(), 
+            base.getX() + dx, 
+            base.getY() + dy,
+            base.getZ() + dz
+        );
+        return out;
+    }
+
+    /**
+     * Returns a string representation of the given location's coordinates
+     * 
+     * @param loc The location to stringify
+     * @return "[worldName](xCoord, yCoord, zCoord)"
+     */
+    public static String stringify(Location loc) {
+        return "[" + loc.getWorld().getName() + "]"
+            + "(" + loc.getX() + ", " 
+            + loc.getY() + ", " 
+            + loc.getZ() + ")";
+    }
+
 }
