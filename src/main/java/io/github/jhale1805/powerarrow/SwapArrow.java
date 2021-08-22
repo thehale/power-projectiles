@@ -9,7 +9,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapelessRecipe;
 
-import io.github.jhale1805.util.Utilities;
+import io.github.jhale1805.util.LocationTools;
 
 public class SwapArrow extends PowerArrow {
 
@@ -56,7 +56,7 @@ public class SwapArrow extends PowerArrow {
 
         if (hitEntity != null && hitEntity instanceof LivingEntity
                 && shooter != null) {
-            Utilities.swapEntityLocations(shooter, hitEntity);
+            LocationTools.swapEntities(shooter, hitEntity);
             shooter.damage(TELEPORT_DAMAGE);
             ((LivingEntity) hitEntity).damage(TELEPORT_DAMAGE);
         }

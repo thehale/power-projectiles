@@ -1,17 +1,21 @@
 package io.github.jhale1805;
 
 import java.io.File;
+import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
+
+import io.github.jhale1805.bstats.Metrics;
 import io.github.jhale1805.powerarrow.*;
 import io.github.jhale1805.powerrecipe.*;
 
 public class PowerProjectilePlugin extends JavaPlugin {
 
     public static PowerProjectilePlugin instance;
+    public static Logger log;
     public final static String NAME = "PowerProjectile";
     public final static int BSTATS_PLUGIN_ID = 12003;
 
@@ -36,13 +40,14 @@ public class PowerProjectilePlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        getLogger().info("Copyright 2021 by Joseph Hale (jhale1805). All Rights Reserved.");
-        getLogger().info("Report issues to https://github.com/jhale1805/power-projectiles");
-        getLogger().info("Loading all Power Projectiles.");
+        log = getLogger();
+        log.info("Copyright 2021 by Joseph Hale (jhale1805). All Rights Reserved.");
+        log.info("Report issues to https://github.com/jhale1805/power-projectiles");
+        log.info("Loading all Power Projectiles.");
         registerPowerArrows();
         registerPowerRecipes();
         new Metrics(this, BSTATS_PLUGIN_ID);  // Enable bStats metrics
-        getLogger().info("Ready!");
+        log.info("Ready!");
     }
 
     private void registerPowerArrows() {
@@ -61,6 +66,6 @@ public class PowerProjectilePlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getLogger().info("Thanks for using Power Projectiles!");
+        log.info("Thanks for using Power Projectiles!");
     }
 }

@@ -4,7 +4,8 @@ package io.github.jhale1805.powerarrow;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import io.github.jhale1805.PowerProjectilePlugin;
-import io.github.jhale1805.util.Utilities;
+import io.github.jhale1805.util.BlockTools;
+import io.github.jhale1805.util.EventTools;
 
 import org.junit.*;
 
@@ -45,14 +46,14 @@ public class ForestFireArrowTest {
     public void test_onThisProjectileHit_hitLocation() {
         // Setup mocks
         ProjectileHitEvent mockEvent = mock(ProjectileHitEvent.class, RETURNS_DEEP_STUBS);
+        Location mockHitLocation = mock(Location.class);
         when(mockEvent.getHitBlock()).thenReturn(null);
+        when(mockEvent.getHitEntity().getLocation()).thenReturn(mockHitLocation);
         // Execute test
-        try (MockedStatic<Utilities> mockUtils = mockStatic(Utilities.class)) {
-            mockUtils.when(() -> Utilities.getImpactLocation(any(ProjectileHitEvent.class)))
-                .thenReturn(mock(Location.class));
+        try (MockedStatic<BlockTools> mockBlockTools = mockStatic(BlockTools.class)) {
             new ForestFireArrow().onThisProjectileHit(mockEvent);
             // Verify results
-            mockUtils.verify(() -> Utilities.replaceAirWith(
+            mockBlockTools.verify(() -> BlockTools.replaceAirWith(
                 eq(Material.FIRE), any(Location.class), anyDouble()));
         }
     }
@@ -62,13 +63,12 @@ public class ForestFireArrowTest {
         // Setup mocks
         ProjectileHitEvent mockEvent = mock(ProjectileHitEvent.class, RETURNS_DEEP_STUBS);
         when(mockEvent.getHitBlock()).thenReturn(null);
+        when(mockEvent.getHitEntity()).thenReturn(null);
         // Execute test
-        try (MockedStatic<Utilities> mockUtils = mockStatic(Utilities.class)) {
-            mockUtils.when(() -> Utilities.getImpactLocation(any(ProjectileHitEvent.class)))
-                .thenReturn(null);
+        try (MockedStatic<BlockTools> mockBlockTools = mockStatic(BlockTools.class)) {
             new ForestFireArrow().onThisProjectileHit(mockEvent);
             // Verify results
-            mockUtils.verify(() -> Utilities.replaceAirWith(
+            mockBlockTools.verify(() -> BlockTools.replaceAirWith(
                 any(Material.class), any(Location.class), anyDouble()),
                 never());
         }

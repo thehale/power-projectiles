@@ -6,7 +6,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapelessRecipe;
 
-import io.github.jhale1805.util.Utilities;
+import io.github.jhale1805.util.EventTools;
 
 public class ExplosiveArrow extends PowerArrow {
 
@@ -45,7 +45,7 @@ public class ExplosiveArrow extends PowerArrow {
         if (!(event.getEntity().getFireTicks() > 0)) 
             return;
 
-        Location impactLocation = Utilities.getImpactLocation(event);
+        Location impactLocation = EventTools.getImpactLocation(event);
         if (impactLocation != null) {
             event.getEntity().getWorld().createExplosion(
                 impactLocation,  // Cause the explosion where the arrow hit.

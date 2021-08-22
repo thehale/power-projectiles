@@ -3,7 +3,7 @@ package io.github.jhale1805.powerarrow;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import io.github.jhale1805.PowerProjectilePlugin;
-import io.github.jhale1805.util.Utilities;
+import io.github.jhale1805.util.LocationTools;
 
 import org.junit.*;
 import org.mockito.MockedStatic;
@@ -49,11 +49,11 @@ public class SwapArrowTest {
         LivingEntity mockHitEntity = mock(LivingEntity.class);
         when(mockEvent.getEntity().getShooter()).thenReturn(mockPlayer);
         when(mockEvent.getHitEntity()).thenReturn(mockHitEntity);
-        try (MockedStatic<Utilities> mockUtils = mockStatic(Utilities.class)) {
+        try (MockedStatic<LocationTools> mockUtils = mockStatic(LocationTools.class)) {
             // Execute test
             new SwapArrow().onThisProjectileHit(mockEvent);
             // Verify results
-            mockUtils.verify(() -> Utilities.swapEntityLocations(mockPlayer, mockHitEntity));
+            mockUtils.verify(() -> LocationTools.swapEntities(mockPlayer, mockHitEntity));
         }
         verify(mockPlayer).damage(anyDouble());
         verify(mockHitEntity).damage(anyDouble());
@@ -67,12 +67,12 @@ public class SwapArrowTest {
         Entity mockHitEntity = mock(Entity.class);
         when(mockEvent.getHitEntity()).thenReturn(mockHitEntity);
         when(mockEvent.getEntity().getShooter()).thenReturn(mockPlayer);
-        try (MockedStatic<Utilities> mockUtils = mockStatic(Utilities.class)) {
+        try (MockedStatic<LocationTools> mockUtils = mockStatic(LocationTools.class)) {
             // Execute test
             new SwapArrow().onThisProjectileHit(mockEvent);
             // Verify results
             mockUtils.verify(() -> 
-                Utilities.swapEntityLocations(
+            LocationTools.swapEntities(
                     any(Entity.class),
                     any(Entity.class)
                 ), never());

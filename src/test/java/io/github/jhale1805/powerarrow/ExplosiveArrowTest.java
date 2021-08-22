@@ -4,7 +4,7 @@ package io.github.jhale1805.powerarrow;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import io.github.jhale1805.PowerProjectilePlugin;
-import io.github.jhale1805.util.Utilities;
+import io.github.jhale1805.util.EventTools;
 
 import org.junit.*;
 
@@ -58,8 +58,8 @@ public class ExplosiveArrowTest {
         ProjectileHitEvent mockEvent = mock(ProjectileHitEvent.class, RETURNS_DEEP_STUBS);
         when(mockEvent.getEntity().getFireTicks()).thenReturn(10);
         // Execute test
-        try (MockedStatic<Utilities> mockUtils = mockStatic(Utilities.class)) {
-            mockUtils.when(() -> Utilities.getImpactLocation(any(ProjectileHitEvent.class)))
+        try (MockedStatic<EventTools> mockUtils = mockStatic(EventTools.class)) {
+            mockUtils.when(() -> EventTools.getImpactLocation(any(ProjectileHitEvent.class)))
                 .thenReturn(null);
             new ExplosiveArrow().onThisProjectileHit(mockEvent);
             // Verify that none of the createExplostion methods were called: https://stackoverflow.com/a/46038313/14765128
@@ -75,8 +75,8 @@ public class ExplosiveArrowTest {
         Location mockLocation = mock(Location.class);
         when(mockEvent.getEntity().getFireTicks()).thenReturn(10);
         // Execute test
-        try (MockedStatic<Utilities> mockUtils = mockStatic(Utilities.class)) {
-            mockUtils.when(() -> Utilities.getImpactLocation(any(ProjectileHitEvent.class)))
+        try (MockedStatic<EventTools> mockUtils = mockStatic(EventTools.class)) {
+            mockUtils.when(() -> EventTools.getImpactLocation(any(ProjectileHitEvent.class)))
                 .thenReturn(mockLocation);
             new ExplosiveArrow().onThisProjectileHit(mockEvent);
             // Verify results

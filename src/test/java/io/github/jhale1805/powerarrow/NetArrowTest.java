@@ -4,7 +4,8 @@ package io.github.jhale1805.powerarrow;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import io.github.jhale1805.PowerProjectilePlugin;
-import io.github.jhale1805.util.Utilities;
+import io.github.jhale1805.util.BlockTools;
+import io.github.jhale1805.util.EventTools;
 
 import org.junit.*;
 import org.mockito.MockedStatic;
@@ -45,14 +46,14 @@ public class NetArrowTest {
     public void test_onThisProjectileHit_hitLocation() {
         // Setup mocks
         ProjectileHitEvent mockEvent = mock(ProjectileHitEvent.class, RETURNS_DEEP_STUBS);
+        Location mockHitLocation = mock(Location.class);
         when(mockEvent.getHitBlock()).thenReturn(null);
+        when(mockEvent.getHitEntity().getLocation()).thenReturn(mockHitLocation);
         // Execute test
-        try (MockedStatic<Utilities> mockUtils = mockStatic(Utilities.class)) {
-            mockUtils.when(() -> Utilities.getImpactLocation(any(ProjectileHitEvent.class)))
-                .thenReturn(mock(Location.class));
+        try (MockedStatic<BlockTools> mockUtils = mockStatic(BlockTools.class)) {
             new NetArrow().onThisProjectileHit(mockEvent);
             // Verify results
-            mockUtils.verify(() -> Utilities.replaceAirWith(
+            mockUtils.verify(() -> BlockTools.replaceAirWith(
                 eq(Material.COBWEB), any(Location.class), anyDouble()));
         }
     }
@@ -62,13 +63,12 @@ public class NetArrowTest {
         // Setup mocks
         ProjectileHitEvent mockEvent = mock(ProjectileHitEvent.class, RETURNS_DEEP_STUBS);
         when(mockEvent.getHitBlock()).thenReturn(null);
+        when(mockEvent.getHitEntity()).thenReturn(null);
         // Execute test
-        try (MockedStatic<Utilities> mockUtils = mockStatic(Utilities.class)) {
-            mockUtils.when(() -> Utilities.getImpactLocation(any(ProjectileHitEvent.class)))
-                .thenReturn(null);
+        try (MockedStatic<BlockTools> mockUtils = mockStatic(BlockTools.class)) {
             new NetArrow().onThisProjectileHit(mockEvent);
             // Verify results
-            mockUtils.verify(() -> Utilities.replaceAirWith(
+            mockUtils.verify(() -> BlockTools.replaceAirWith(
                 any(Material.class), any(Location.class), anyDouble()),
                 never());
         }

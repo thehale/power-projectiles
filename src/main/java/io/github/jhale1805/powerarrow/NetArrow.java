@@ -7,7 +7,8 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 
-import io.github.jhale1805.util.Utilities;
+import io.github.jhale1805.util.BlockTools;
+import io.github.jhale1805.util.EventTools;
 
 public class NetArrow extends PowerArrow {
 
@@ -48,9 +49,9 @@ public class NetArrow extends PowerArrow {
 
     @Override
     protected void onThisProjectileHit(ProjectileHitEvent event) {
-        Location impactLocation = Utilities.getImpactLocation(event);
+        Location impactLocation = EventTools.getImpactLocation(event);
         if (impactLocation != null) {
-            Utilities.replaceAirWith(Material.COBWEB, impactLocation, 0.5);
+            BlockTools.replaceAirWith(Material.COBWEB, impactLocation, 0.5);
         }
     }
     
