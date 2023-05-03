@@ -1,3 +1,9 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+
 package io.github.jhale1805;
 
 import java.io.File;
@@ -41,8 +47,8 @@ public class PowerProjectilePlugin extends JavaPlugin {
     public void onEnable() {
         instance = this;
         log = getLogger();
-        log.info("Copyright 2021 by Joseph Hale (jhale1805). All Rights Reserved.");
-        log.info("Report issues to https://github.com/jhale1805/power-projectiles");
+        log.info("Copyright 2021 by Joseph Hale (thehale). All Rights Reserved.");
+        log.info("Report issues to https://github.com/thehale/power-projectiles");
         log.info("Loading all Power Projectiles.");
         registerPowerArrows();
         registerPowerRecipes();
