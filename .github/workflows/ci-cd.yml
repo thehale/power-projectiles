@@ -52,7 +52,7 @@ jobs:
       run: echo "PRODUCE_RELEASE=${{steps.build.outputs.is_new_version == 'true'
         && github.event_name == 'push'
         && github.ref == 'refs/heads/master'
-        && github.repository == 'jhale1805/power-projectiles'
+        && github.repository == 'thehale/power-projectiles'
         && !contains(toJSON(github.event.commits.*.message), '[skip release]')}}" >> $GITHUB_ENV
     - name: 6. Generate changelog [RELEASE ONLY]
       id: changelog
@@ -77,4 +77,4 @@ jobs:
         # fail_on_unmatched_files: True  # Documented, but not yet released. See: https://github.com/softprops/action-gh-release/issues/80
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITHUB_REPOSITORY: jhale1805/power-projectiles
+        GITHUB_REPOSITORY: thehale/power-projectiles
