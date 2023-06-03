@@ -25,7 +25,7 @@ name) contains instructions for how to use it.
 |🕯 **Torch Arrow** | Places a torch wherever it lands. | <img src="resources/TorchArrow.gif" width="300" height="160" /> |
 
 ## Installation
-1. Download the [latest release](https://github.com/jhale1805/power-projectiles/releases/) of Power Projectiles from GitHub Releases.
+1. Download the [latest release](https://github.com/thehale/power-projectiles/releases/) of Power Projectiles from GitHub Releases.
 2. Copy the downloaded `power-projectiles-VERSION.jar` into your server's `plugins` directory.
 
 ## Contributing
@@ -33,7 +33,7 @@ name) contains instructions for how to use it.
  * If you want to develop new features, feel free to open a pull request.
 
 ### Building Power Projectiles from Source
-1. Download the source code: `git clone https://https://github.com/jhale1805/power-projectiles.git`.
+1. Download the source code: `git clone https://https://github.com/thehale/power-projectiles.git`.
 2. Open a terminal in the root folder of the project.
 3. Build the jar: `gradle build`.
 4. Copy the generated jar from `./build/libs/power-projectiles.jar` into your server's `plugins` directory.
