@@ -13,7 +13,6 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 
-import dev.jhale.powerprojectiles.util.BlockTools;
 import dev.jhale.powerprojectiles.util.EventTools;
 
 public class LightningArrow extends PowerArrow {
