@@ -1,11 +1,17 @@
+<div align="center"> 
+
+<img src="src/main/resources/icon.svg" width="256" height="256" />
+
 # Power Projectiles
 This is a Minecraft Plugin for Bukkit/Paper/Spigot servers that adds several new
-super-powered projectiles that make the standard potion tipped arrows look boring.
+super-powered projectiles that make the standard potion-tipped arrows look boring.
 
 <!-- BADGES -->
 [![](https://badgen.net/github/license/thehale/power-projectiles)](https://github.com/thehale/power-projectiles/blob/master/LICENSE)
 [![](https://badgen.net/badge/icon/Sponsor/pink?icon=github&label)](https://github.com/sponsors/thehale)
 [![](https://badgen.net/badge/icon/Follow%20@jhaledev/1DA1F2?icon=twitter&label)](https://twitter.com/intent/user?screen_name=jhaledev)
+
+</div>
 
 ## Crafting and Use
 As long as a player has gotten the Enchanter advancement, he/she can also see 
