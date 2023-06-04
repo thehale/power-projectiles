@@ -24,6 +24,7 @@ name) contains instructions for how to use it.
 |💥 **Explosive Arrow** | Causes a small explosion on impact. | <img src="resources/ExplosiveArrow.gif" width="300" height="160" /> |
 |🔥 **Forest Fire Arrow** | Starts a medium sized fire on impact. | <img src="resources/ForestFireArrow.gif" width="300" height="160" /> |
 |⛓ **Jail Arrow** | Surrounds a hit enemy with iron bars. *NEW in v1.8.0!* | ![Jail Arrow Example](https://user-images.githubusercontent.com/47901316/126048412-2e14253c-e66d-4263-928d-c38c6a9b981c.png) |
+|⚡ **Lightning Arrow** | Summons a bolt of lightning at the site of impact. | Example image not yet available |
 |🕸 **Net Arrow** | Places cobwebs on impact to drastically slow down your enemies. | <img src="resources/NetArrow.gif" width="300" height="160" /> |
 |🎯 **Sniper Arrow** | Ignores gravity and flies extra fast to directly hit targets in your crosshairs. | Example image not yet available |
 |👥 **Swap Arrow** | Causes you and a hit enemy to trade locations on the map. | Example image not yet available |

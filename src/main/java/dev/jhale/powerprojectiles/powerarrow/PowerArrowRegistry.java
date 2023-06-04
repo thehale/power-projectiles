@@ -14,6 +14,7 @@ public class PowerArrowRegistry {
         new ExplosiveArrow(),
         new ForestFireArrow(),
         new JailArrow(),
+        new LightningArrow(),
         new NetArrow(),
         new SniperArrow(),
         new SwapArrow(),
