@@ -13,6 +13,7 @@ public class PowerArrowRegistry {
     private static PowerArrow[] powerArrows = {
         new ExplosiveArrow(),
         new ForestFireArrow(),
+        new HordeArrow(),
         new JailArrow(),
         new LightningArrow(),
         new NetArrow(),
