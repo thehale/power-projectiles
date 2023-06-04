@@ -55,7 +55,7 @@ public class ExplosiveArrow extends PowerArrow {
         if (impactLocation != null) {
             event.getEntity().getWorld().createExplosion(
                 impactLocation,  // Cause the explosion where the arrow hit.
-                8F,          // Cause an explosion of 1/2th the power of TNT
+                2F,          // Cause an explosion of 1/2th the power of TNT
                 false,       // Don't start fires
                 true,        // Do break blocks.
                 event.getEntity()
