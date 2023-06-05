@@ -12,6 +12,13 @@ public class PowerRecipeRegistry {
     
     private static PowerRecipe[] powerRecipes = {
         new Cobweb(),
+        new NotchApple(),
+        new RavagerSpawnEgg(),
+        new TotemofUndying(),
+        new Trident(),
+        new WitherSkeletonSpawnEgg(),
+        new XPBottle(),
+        new ZombieSpawnEgg(),
     };
 
     public static PowerRecipe[] getPowerRecipes() {

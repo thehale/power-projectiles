@@ -13,7 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.Recipe;
 
 import dev.jhale.powerprojectiles.PowerProjectilePlugin;
 
@@ -21,7 +21,7 @@ public abstract class PowerRecipe implements Listener {
     
     public abstract String getName();
 
-    public abstract ShapedRecipe getRecipe();
+    public abstract Recipe getRecipe();
 
     public NamespacedKey getRecipeKey() {
         return new NamespacedKey(
