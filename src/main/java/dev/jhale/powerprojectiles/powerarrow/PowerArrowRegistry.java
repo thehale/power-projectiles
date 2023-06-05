@@ -21,6 +21,7 @@ public class PowerArrowRegistry {
         new SwapArrow(),
         new TeleportArrow(),
         new TorchArrow(),
+        new WaterArrow(),
     };
 
     public static PowerArrow[] getPowerArrows() {
