@@ -14,4 +14,8 @@ bin
 
 # Ignore plugin build tools
 spigot
-.server
+.server/*
+
+# Include dev server
+!.server/paper-*.jar
+!.server/eula.txt

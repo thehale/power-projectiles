@@ -40,10 +40,13 @@ name) contains instructions for how to use it.
  * Please report any issues you find on the `Issues` tab.
  * If you want to develop new features, feel free to open a pull request.
 
+While developing, use the command `./gradlew runDevServer` to run a Paper server
+with your changes loaded.
+
 ### Building Power Projectiles from Source
 1. Download the source code: `git clone https://https://github.com/thehale/power-projectiles.git`.
 2. Open a terminal in the root folder of the project.
-3. Build the jar: `gradle build`.
+3. Build the jar: `./gradlew build`.
 4. Copy the generated jar from `./build/libs/power-projectiles.jar` into your server's `plugins` directory.
 
 ### Adding new Power Projectiles

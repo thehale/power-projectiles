@@ -114,6 +114,26 @@ task cleanupChangelog (dependsOn: 'generateChangelog') {
   }
 }
 
+task copyPluginToDevServer (dependsOn: 'build') {
+    group 'Local Development'
+    doLast {
+        copy {
+            from 'build/libs/power-projectiles-' + project.version + '.jar'
+            into '.server/plugins'
+        }
+    }
+}
+
+task runDevServer (dependsOn: 'copyPluginToDevServer') {
+    group 'Local Development'
+    doLast {
+        exec {
+            workingDir '.server'
+            commandLine 'java', '-jar', 'paper-1.20.1-129.jar', 'nogui'
+        }
+    }
+}
+
 generateChangelog {
   previousRevision = project.ext.'shipkit-auto-version.previous-tag'
   githubToken = System.getenv("GITHUB_TOKEN")
