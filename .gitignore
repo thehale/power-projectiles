@@ -14,3 +14,4 @@ bin
 
 # Ignore plugin build tools
 spigot
+.server
