@@ -47,7 +47,7 @@ public class PowerProjectilePlugin extends JavaPlugin {
     public void onEnable() {
         instance = this;
         log = getLogger();
-        log.info("Copyright 2021 by Joseph Hale (thehale). All Rights Reserved.");
+        log.info("Copyright (c) 2021-2023 by Joseph Hale (thehale). All Rights Reserved.");
         log.info("Report issues to https://github.com/thehale/power-projectiles");
         log.info("Loading all Power Projectiles.");
         registerPowerArrows();
