@@ -43,7 +43,7 @@ jobs:
         echo "::set-output name=is_new_version::$(./gradlew isNewVersion -q)"
     - name: 4. Upload built .jar as artifact
       id: upload_jar
-      uses: actions/upload-artifact@v2.2.4
+      uses: actions/upload-artifact@v4
       with:
         name: power-projectiles
         path: build/libs/power-projectiles-*.jar
@@ -62,7 +62,7 @@ jobs:
     - name: 7. Upload changelog as artifact [RELEASE ONLY]
       id: upload_changelog
       if: ${{ env.PRODUCE_RELEASE == 'true' }}
-      uses: actions/upload-artifact@v2.2.4
+      uses: actions/upload-artifact@v4
       with:
         name: changelog
         path: build/changelog-clean.md
