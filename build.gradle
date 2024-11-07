@@ -165,7 +165,7 @@ String mostRecentVersion( List versions ) {
 def getPluginYml() {
   // Read in the plugin.yml file for the Minecraft Plugin.
   // Aided by https://stackoverflow.com/a/48320319/14765128
-  String PLUGIN_YML_PATH = "src/main/resources/plugin.yml"
+  String PLUGIN_YML_PATH = project.projectDir.toString() + "/src/main/resources/plugin.yml"
   InputStream pluginYml = new File(PLUGIN_YML_PATH).newInputStream()
   return new org.yaml.snakeyaml.Yaml().load(pluginYml)
 }
